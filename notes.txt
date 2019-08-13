@@ -1,0 +1,20 @@
+two pointer
+recursion
+data structures
+
+boxes
+
+O(n) => O of n
+
+how to optimize 
+
+flood fill
+
+
+
+Strings
+Lists
+Sets
+Trees
+    Hashes
+    Heaps
