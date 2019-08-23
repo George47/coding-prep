@@ -10,9 +10,23 @@ how to optimize
 
 flood fill:
 417. Pacific Atlantic Water Flow
+573. Squirrel Simulation
 
 
+Trees:
+938. Range Sum of BST (easy)
+310. Minimum Height Trees
+1026. Maximum Difference Between Node and Ancestor
+199. Binary Tree Right Side View
+333. Largest BST Subtree
+637. Average of Levels in Binary Tree
 
+    preorder and postorder traversal
+    889. Construct Binary Tree from Preorder and Postorder Traversal
+
+
+for i in range(0, range(n), 2)
+# increments by 2
 
 Strings
 Lists
@@ -22,3 +36,15 @@ Trees
     Heaps
 
 742757248
+
+set(List) removes multiples
+
+Good questions:
+139. Word Break
+856. Score of Parentheses
+
+
+Hard questions:
+524. Longest Word in Dictionary through Deleting
+
+39. Combination Sum
