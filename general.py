@@ -95,15 +95,41 @@ def convertToBase7(num: int) -> str:
         else:
             return r + convertToBase7(num // 7)
 
+def convertEquation(s: str) -> str:
+    for char in s:
+        print(char)
+
+def wordPattern(pattern: str, str: str) -> bool:
+    dictionary = str.split()
+    taken = []
+    if len(pattern) != len(dictionary):
+        return False
+    refDict = {}
+    for i in range(len(pattern)):
+        if dictionary[i] in taken:
+            if pattern[i] not in refDict or dictionary[i] != refDict[pattern[i]]:
+                return False
+
+        if pattern[i] not in refDict:
+            refDict[pattern[i]] = dictionary[i]
+            taken.append(dictionary[i])
+        else:
+            if refDict[pattern[i]] != dictionary[i]:
+                return False
+    print(taken)
+    return True
+
 if __name__ == '__main__':
-    print(findLengthOfLCISImprove([1,3,5,4,7]))
-    print(findLengthOfLCISImprove([2,2,2,2,2]))
-    print(findLengthOfLCISImprove([]))
-    print(findLengthOfLCISImprove([1,3,5,7]))
+    print(wordPattern('abba', 'dog dog dog dog'))
+    # print(convertEquation('-(a+b)'))
+    # print(findLengthOfLCISImprove([1,3,5,4,7]))
+    # print(findLengthOfLCISImprove([2,2,2,2,2]))
+    # print(findLengthOfLCISImprove([]))
+    # print(findLengthOfLCISImprove([1,3,5,7]))
 
-    print(reverseStr('abcdefg', 2))
-    print(containsDuplicate([1,2,3,4,5]))
+    # print(reverseStr('abcdefg', 2))
+    # print(containsDuplicate([1,2,3,4,5]))
 
-    # print(convertToBase7(-7))
+    # # print(convertToBase7(-7))
 
-    print(sum([1,23]))
+    # print(sum([1,23]))

@@ -43,8 +43,28 @@ Good questions:
 139. Word Break
 856. Score of Parentheses
 
+Pretty good questions:
+168. Excel Sheet Column Title
+
 
 Hard questions:
 524. Longest Word in Dictionary through Deleting
 
 39. Combination Sum
+
+
+
+
+
+Simple base conversion
+ans = []
+while n > 0:
+    ans.append(chr(ord('A') + int((n-1) % 26)))
+    n = (n-1) // 26
+return ''.join(ans)[::-1]
+
+
+
+Must-dos:
+same equation interview problem
+regular expression check
