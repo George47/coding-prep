@@ -119,8 +119,241 @@ def wordPattern(pattern: str, str: str) -> bool:
     print(taken)
     return True
 
+def simplify(Str): 
+    Len = len(Str) 
+  
+    # resultant String of max Length 
+    # equal to Length of input String  
+    res = [''] * Len
+    index = 0
+    i = 0
+  
+    # create empty stack  
+    s = [] 
+    s.append(0)  
+  
+    while (i < Len):  
+        # if sign, flip based on stack space
+        if (Str[i] == '+'):  
+  
+            # If top is 1, flip the operator  
+            if (s[-1] == 1):  
+                res[index] = '-'
+                index += 1
+  
+            # If top is 0, append the  
+            # same operator  
+            if (s[-1] == 0): 
+                res[index] = '+'
+                index += 1
+  
+        # same for - sign, 
+        elif (Str[i] == '-'): 
+            if (s[-1] == 1):  
+                res[index] = '+'
+                index += 1
+            elif (s[-1] == 0):  
+                res[index] = '-'
+                index += 1
+
+        # checking if its (
+        elif (Str[i] == '(' and i > 0): 
+            if (Str[i - 1] == '-'): 
+  
+                # x is opposite to the top of stack  
+                x = 0 if (s[-1] == 1) else 1
+                s.append(x) 
+  
+            # append value equal to top of the stack  
+            elif (Str[i - 1] == '+'):  
+                s.append(s[-1]) 
+  
+        # If closing parentheses pop 
+        # the stack once  
+        elif (Str[i] == ')'):  
+            s.pop()  
+  
+        # copy the character to the result  
+        else: 
+            res[index] = Str[i] 
+            index += 1
+        i += 1
+    return ''.join(res) 
+
+def checkValidString(s: str) -> bool:
+        if not s:
+            return True
+        stack = []
+        for v in s:
+            if v == '(' or v == '*':
+                stack.append(v)
+            elif v == ')':
+                if not stack:
+                        return False
+                if stack[-1] == '(' or stack[-1] == '*':
+                    stack.pop()
+                else:
+                    return False
+        return True
+
+def minMoves2(nums):
+    d = {}
+    for num in nums:
+        if num in d:
+            d[num] += 1
+        else:
+            d[num] = 0
+    return sorted(d)
+
+def maxIsland(grid):
+    def dfs(row, col, grid, size):
+        if row < 0 or col < 0 or row == len(grid) or col == len(grid[0]) or grid[row][col] != '1':
+            return 0
+        else:
+            grid[row][col] = '0'
+            return 1 + dfs(row + 1, col, grid, size) + dfs(row - 1, col, grid, size) + dfs(row, col + 1, grid, size) + dfs(row, col - 1, grid, size)
+    
+    maxIsland = 0
+    for row in range(len(grid)):
+        for col in range(len(grid[0])):
+            if grid[row][col] == '1':
+                size2 = dfs(row, col, grid, 0)
+                maxIsland = max(maxIsland, size2)
+    return maxIsland
+
+def expand(S: str):
+    def parse(S):
+        result = []
+        r = None
+        for x in S:
+            if x == '{':
+                r = []
+            elif x == ',':
+                continue
+            elif x == '}':
+                result.append(sorted(r))
+                r = None
+            elif r == None:
+                result.append([x])
+            else:
+                r.append(x)
+        return result
+
+    p = parse(S)
+    result = []
+
+    def dfs(p, i, r=[]):
+        if i == len(p):
+            result.append(''.join(r))
+            return
+        for x in p[i]:
+            r.append(x)
+            dfs(p, i+1, r)
+            r.pop()
+    dfs(p,0)
+    return result
+
+def simplifyEquation(s: str) -> str:
+    # cases to consider
+    # if current is - and next is (
+    # means need to flip sign
+    triggerCounter = 0
+    stack = []
+    result = ''
+    for i in range(len(s)):
+        # if -( then need to trigger
+        if s[i] == '-' and s[i+1] == '(':
+            triggerCounter += 1
+            stack.append('-(')
+            sign = s[i]
+            for j in range(triggerCounter - 1):
+                sign = flipSign(sign)
+            result += sign
+            continue
+        # when encountering closing bracket
+        if s[i] == ')':
+            if stack.pop() == '-(':
+                triggerCounter -= 1
+        if s[i] in ['(', ')']:
+            continue
+        if s[i] in ['+', '-']:
+            sign = s[i]
+            for z in range(triggerCounter):
+                sign = flipSign(sign)
+            result += sign
+            continue
+        result += s[i]
+    return result
+
+def flipSign(sign: str) -> str:
+    signs = {
+        '+': '-',
+        '-': '+'
+    }
+    return signs[sign]
+
+def simplifyChars(s: str) -> str:
+    # cases,
+    # digit
+    #   record digit, record i+1 char
+    #   push both onto stack
+    # char
+    #   if last in stack is same, += 1
+    #   else push onto stack
+    charStack = []
+    countStack = []
+    i = 0
+    result = ''
+    count = 0
+    while i <= len(s) - 1:
+        if s[i].isdigit():
+            count = int(s[i])
+            while s[i+1].isdigit():
+                count += int(s[i+1])
+                i += 1
+            if not charStack or charStack[-1] != s[i+1]:
+                countStack.append(count)
+                charStack.append(s[i+1])
+            else:
+                toInt = int(countStack[-1]) + int(s[i])
+                countStack[-1] = toInt 
+            i += 1
+        else:
+            if not charStack or charStack[-1] != s[i]:
+                charStack.append(s[i])
+                countStack.append(1)
+            else:
+                toInt = int(countStack[-1]) + 1
+                countStack[-1] = toInt
+        i += 1
+    
+    for j in range(len(charStack)):
+        if int(countStack[j]) > 1:
+            result += str(countStack[j])
+        result += charStack[j]
+    return result
+
 if __name__ == '__main__':
-    print(wordPattern('abba', 'dog dog dog dog'))
+    # print(expand('{a,b}c{d,e}f'))
+    # print(simplifyEquation('-(a+b)+a'))
+    # print(simplify('-(a-(b-c-(d+e))-f)'))
+    # print(simplifyEquation('-(a-(b-c-(d+e))-f)'))
+    # # a-(b-c-(d+e))-f => a-b+c-d+e-f
+    # s = 'test'
+    # dic = {}
+    # for char in s:
+    #     dic[char] = dic.get(char, 0) + 1
+    # print(dic)
+
+    print(simplifyChars('99a2a5b'))
+    print(simplifyChars('9a2b5a'))
+    print(simplifyChars('a111abbccddee'))
+    print(simplifyChars(''))
+    print(simplifyChars('5ab3bccd1dee'))
+
+    # print(checkValidString('(()'))
+    # print(wordPattern('abba', 'dog dog dog dog'))
+    # print(simplify('a-(b-c-(d+e))-f'))
     # print(convertEquation('-(a+b)'))
     # print(findLengthOfLCISImprove([1,3,5,4,7]))
     # print(findLengthOfLCISImprove([2,2,2,2,2]))
@@ -133,3 +366,4 @@ if __name__ == '__main__':
     # # print(convertToBase7(-7))
 
     # print(sum([1,23]))
+    # print(maxIsland([[1,1,0,0,0],[1,1,0,0,0],[0,0,0,1,1],[0,0,0,1,1]]))
