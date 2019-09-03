@@ -335,6 +335,7 @@ def simplifyChars(s: str) -> str:
                 countStack[-1] = toInt
         i += 1
     
+    # add the stacks to result str
     for j in range(len(charStack)):
         if int(countStack[j]) > 1:
             result += str(countStack[j])
