@@ -333,6 +333,28 @@ def simplifyChars(s: str) -> str:
         result += charStack[j]
     return result
 
+def findPair(nums: list, target: int) -> str:
+    d = []
+    for i in range(len(nums) - 1):
+        if target - nums[i] in nums[i+1:]:
+            return str(nums[i]) + ' and ' + str((target - nums[i]))
+    return 'No valid pairs'
+    # d = {}
+    # for num in nums:
+    #     if num in d:
+    #         d[num] += 1
+    #     else:
+    #         d[num] = 0
+        
+    # for num in nums:
+    #     targetC = target - num
+    #     if targetC in d:
+    #         if targetC == num:
+    #             if not d[targetC] > 0:
+    #                 continue
+    #         return str(num) + ' and ' + str(targetC)
+    # return 'no valid pairs'   
+
 if __name__ == '__main__':
     # print(expand('{a,b}c{d,e}f'))
     # print(simplifyEquation('-(a+b)+a'))
@@ -345,11 +367,13 @@ if __name__ == '__main__':
     #     dic[char] = dic.get(char, 0) + 1
     # print(dic)
 
-    print(simplifyChars('99a2a5b'))
-    print(simplifyChars('9a2b5a'))
-    print(simplifyChars('a111abbccddee'))
-    print(simplifyChars(''))
-    print(simplifyChars('5ab3bccd1dee'))
+    # print(simplifyChars('99a2a5b'))
+    # print(simplifyChars('9a2b5a'))
+    # print(simplifyChars('a111abbccddee'))
+    # print(simplifyChars(''))
+    # print(simplifyChars('5ab3bccd1dee'))
+
+    print(findPair([1,2,3], 0))
 
     # print(checkValidString('(()'))
     # print(wordPattern('abba', 'dog dog dog dog'))
