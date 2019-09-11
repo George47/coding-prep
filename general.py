@@ -293,7 +293,7 @@ def flipSign(sign: str) -> str:
     return signs[sign]
 
 def simplifyChars(s: str) -> str:
-    # cases,
+    # 2 cases,
     # digit
     #   record digit, record i+1 char
     #   push both onto stack
@@ -305,19 +305,27 @@ def simplifyChars(s: str) -> str:
     i = 0
     result = ''
     count = 0
+    # using while loop to increment the index
     while i <= len(s) - 1:
+        # digit case
         if s[i].isdigit():
             count = int(s[i])
+            # check for multiple digits and save them as integer 
             while s[i+1].isdigit():
                 count += int(s[i+1])
                 i += 1
+            # if stack doesnt exist or last element is not i, push to stacks
             if not charStack or charStack[-1] != s[i+1]:
                 countStack.append(count)
                 charStack.append(s[i+1])
+            # if stack exists, push the count and char to stack
             else:
                 toInt = int(countStack[-1]) + int(s[i])
                 countStack[-1] = toInt 
+            # inc the index
             i += 1
+        # non-digit case
+        # same as digit case but treat as digit = 1
         else:
             if not charStack or charStack[-1] != s[i]:
                 charStack.append(s[i])
@@ -327,6 +335,7 @@ def simplifyChars(s: str) -> str:
                 countStack[-1] = toInt
         i += 1
     
+    # add the stacks to result str
     for j in range(len(charStack)):
         if int(countStack[j]) > 1:
             result += str(countStack[j])
