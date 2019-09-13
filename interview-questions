@@ -1,0 +1,16 @@
+Soundhound:
+find the leftmost character of only occuring once
+e.g. aabbcdee => c
+
+prevent bigint overflow
+e.g. 0xffffffff ++ => should still appear
+
+hour pin and minute pin degree difference
+e.g. 12, 15 => 97.5
+
+find the equilibrium point of index of a list
+e.g. [5,2,3,3,4] => 2
+
+vector combinations
+e.g. ('Number', 1), ('Number', 2), ('Letter', 'A'), ('Number', 3), ('Letter', 'B'), ('Color', 'red')
+=> (1, 'a', 'red'), (1, 'b', 'red'), (2, 'a', 'red'), (2, 'b', 'red'), (3, 'a', 'red'), (3, 'b', 'red')
