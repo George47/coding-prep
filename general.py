@@ -348,12 +348,7 @@ def findPair(nums: list, target: int) -> str:
         if target - nums[i] in nums[i+1:]:
             return str(nums[i]) + ' and ' + str((target - nums[i]))
     return 'No valid pairs'
-    # d = {}
-    # for num in nums:
-    #     if num in d:
-    #         d[num] += 1
-    #     else:
-    #         d[num] = 0
+
         
     # for num in nums:
     #     targetC = target - num
