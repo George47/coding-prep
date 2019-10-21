@@ -1,17 +1,3 @@
 # Interview Progress
  
 Some coding challenges to prep interviews
-
-# In Progress
-
-- Soundhound (on-site)
-- VTS (techincal)
-- Toolbx (techincal)
-- Thoughtwire
-- Versapay
-
-# Questions
-
-- Flood fill
-- Use stack
-- Iteration
